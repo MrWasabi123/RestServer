@@ -1,0 +1,5 @@
+msp\Greeting.class
+msp\UserController.class
+msp\Application.class
+msp\model\User.class
+services\UserService.class
