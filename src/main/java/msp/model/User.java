@@ -2,10 +2,9 @@ package msp.model;
 
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
@@ -121,5 +120,20 @@ public class User implements Serializable{
                 "User[id=%d, Name='%s', NickName='%s']",
                 id, name, nickname);
     }
+
+    
+    
+    
+    
+    
+    
+	public Set<UserRole> getUserRole() {
+		return null;
+	}
+
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
 

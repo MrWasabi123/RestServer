@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import msp.model.User;
-import services.UserServiceImpl;
+import msp.services.UserServiceImpl;
 
 
 @RestController
@@ -28,8 +28,6 @@ public class MainController {
 	
 	@RequestMapping(value = "/users/{id}")
 	public User getUser(@PathVariable Long id){
-		System.out.println("something");
-		
 		return userService.findUserById(id);
 	}
 	
@@ -39,24 +37,24 @@ public class MainController {
 		return userService.findAllUsers();
 	}
 	
-	@PostMapping(value = "/login")
-	public User loginUser(@RequestBody final User user){
-		List<User> users = userService.findAllUsers();
-		if (users.contains(user)) {
-			return user;
-		} else {
-			return null;
-		}
-	}
+//	@PostMapping(value = "/login")
+//	public User loginUser(@RequestBody final User user){
+//		List<User> users = userService.findAllUsers();
+//		if (users.contains(user)) {
+//			return user;
+//		} else {
+//			return null;
+//		}
+//	}
 	
-	@PostMapping(value = "/register")
-	public User registerUser(@RequestBody final User user){
-		List<User> users = userService.findAllUsers();
-		if (users.contains(user)) {
-			return null;
-		} else {
-			userService.saveUser(user);
-			return user;
-		}
-	}
+//	@PostMapping(value = "/register")
+//	public User registerUser(){
+//		List<User> users = userService.findAllUsers();
+//		if (users.contains(user)) {
+//			return null;
+//		} else {
+//			userService.saveUser(user);
+//			return user;
+//		}
+//	}
 }

@@ -1,9 +1,10 @@
-C:\Users\MrWasabi\workspace\RestServer\src\main\java\msp\UserController.java
+C:\Users\MrWasabi\workspace\RestServer\src\main\java\msp\security\AuthenticationEntryPoint.java
 C:\Users\MrWasabi\workspace\RestServer\src\main\java\msp\Application.java
+C:\Users\MrWasabi\workspace\RestServer\src\main\java\msp\security\AppConfig.java
+C:\Users\MrWasabi\workspace\RestServer\src\main\java\msp\model\UserRole.java
 C:\Users\MrWasabi\workspace\RestServer\src\main\java\msp\repositories\UserRepository.java
+C:\Users\MrWasabi\workspace\RestServer\src\main\java\msp\services\UserServiceImpl.java
+C:\Users\MrWasabi\workspace\RestServer\src\main\java\msp\services\UserService.java
 C:\Users\MrWasabi\workspace\RestServer\src\main\java\msp\model\User.java
-C:\Users\MrWasabi\workspace\RestServer\src\main\java\services\UserService.java
-C:\Users\MrWasabi\workspace\RestServer\src\main\java\msp\Greeting.java
+C:\Users\MrWasabi\workspace\RestServer\src\main\java\msp\security\SpringSecurityConfig.java
 C:\Users\MrWasabi\workspace\RestServer\src\main\java\msp\MainController.java
-C:\Users\MrWasabi\workspace\RestServer\src\main\java\bootstrap\BootStrap.java
-C:\Users\MrWasabi\workspace\RestServer\src\main\java\services\UserServiceImpl.java
