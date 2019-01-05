@@ -1,6 +1,6 @@
 package services;
 
-/*
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,32 +17,35 @@ public class UserServiceImpl implements UserService {
 	public UserServiceImpl(UserRepository userRepository) {
 		this.userRpository = userRepository;
 		System.out.println("user count service: " + userRepository.count());
+		
+		User user1 = new User();
+		user1.setId(1);
+		user1.setName("Wanja");
+		userRpository.save(user1);
+		
+		User user2 = new User();
+		user2.setId(2);
+		user2.setName("Lydia");
+		userRpository.save(user2);
 	}
 	
 	@Override
 	public User findUserById(Long id) {
 		
-		ArrayList<User> users = new ArrayList<>();
-		User user1 = new User();
-		user1.setName("Wanja");
-		User user2 = new User();
-		user2.setName("Lydia");
-		
 		//return user1;
-		return userRpository.getOne(id);
+		return userRpository.findById(id).get();
 	}
 
 	@Override
 	public List<User> findAllUsers() {
-		ArrayList<User> users = new ArrayList<>();
-		User user1 = new User();
-		user1.setName("Wanja");
-		User user2 = new User();
-		user2.setName("Lydia");
 		
 		//return users;
 		return userRpository.findAll();
 	}
 
+	@Override
+	public void saveUser(User user) {
+		userRpository.save(user);
+	}
+
 }
-*/
