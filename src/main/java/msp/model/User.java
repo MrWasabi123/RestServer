@@ -2,6 +2,7 @@ package msp.model;
 
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -20,6 +21,8 @@ public class User implements Serializable{
     private String subject;
     private String plan;
     private int ratings;
+    private boolean enabled;
+    private String userRole;;
 
     public User(){
 
@@ -36,6 +39,19 @@ public class User implements Serializable{
         this.plan = plan;
         this.ratings = ratings;
     }
+    
+    public User(String name, String password, boolean enabled) {
+		this.name = name;
+		this.password = password;
+		this.enabled = enabled;
+	}
+
+	public User(String name, String password, boolean enabled, String userRole) {
+		this.name = name;
+		this.password = password;
+		this.enabled = enabled;
+		this.userRole = userRole;
+	}
 
     
     public long getId() {
@@ -114,26 +130,28 @@ public class User implements Serializable{
         return "";
     }
     
+    public boolean isEnabled() {
+		return this.enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	//@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	public String getUserRole() {
+		return this.userRole;
+	}
+
+	public void setUserRole(String userRole) {
+		this.userRole = userRole;
+	}
+    
     @Override
     public String toString() {
     	return String.format(
                 "User[id=%d, Name='%s', NickName='%s']",
                 id, name, nickname);
     }
-
-    
-    
-    
-    
-    
-    
-	public Set<UserRole> getUserRole() {
-		return null;
-	}
-
-	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 }
 
