@@ -1,9 +1,7 @@
 package msp.services;
 
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -29,17 +27,21 @@ public class UserServiceImpl implements UserService { //
 		System.out.println("user count service: " + userRepository.count());
 		
 		//Test
-		msp.model.User user1 = new msp.model.User();
-		user1.setId(1);
-		user1.setName("Wanja");
-		user1.setEmail("test@test.de");
-		userRepository.save(user1);
-		
-		msp.model.User user2 = new msp.model.User();
-		user2.setId(2);
-		user2.setName("Lydia");
-		user2.setEmail("test2@test.de");
-		userRepository.save(user2);
+//		msp.model.User user1 = new msp.model.User();
+//		user1.setId(1);
+//		user1.setName("Ju");
+//		user1.setEmail("test3@test.de");
+//		user1.setPassword("1");
+//		user1.setUserRole("ADMIN");
+//		userRepository.save(user1);
+//		
+//		msp.model.User user2 = new msp.model.User();
+//		user2.setId(2);
+//		user2.setName("Lydia");
+//		user2.setEmail("test2@test.de");
+//		user2.setPassword("321");
+//		user2.setUserRole("ROLE_ADMIN");
+//		userRepository.save(user2);
 	}
 	
 
@@ -56,11 +58,8 @@ public class UserServiceImpl implements UserService { //
 	@Override
     public void save(User user) {
         user.setPassword(passwordEncoder().encode(user.getPassword()));
-//        Set<UserRole> roles = new HashSet<>();
-//        UserRole role = new UserRole();
-//        role.setRole("Default");
-//        roles.add(role);
-//        user.setRoles(roles);
+        user.setEnabled(true);
+        user.setUserRole("USER");
         userRepository.save(user);
     }
 }

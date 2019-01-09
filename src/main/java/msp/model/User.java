@@ -2,26 +2,41 @@ package msp.model;
 
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "user")
 public class User implements Serializable{
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name = "user_id")
     private long id;
+	@Column(name = "name")
     private String name;
+	@Column(name = "email")
     private String email;
+	@Column(name = "nickname")
     private String nickname;
+	@Column(name = "password")
     private String password;
+	@Column(name = "studies")
     private String studies;
+	@Column(name = "subject")
     private String subject;
+	@Column(name = "plan")
     private String plan;
-    private int ratings;
+	@Column(name = "ratings")
+	private int ratings;
+	@Column(name = "enabled")
     private boolean enabled;
+	@Column(name = "role")
     private String userRole;;
 
     public User(){

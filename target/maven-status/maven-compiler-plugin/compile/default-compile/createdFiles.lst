@@ -1,8 +1,10 @@
-msp\model\UserRole.class
+msp\security\AuthenticationEntryPoint.class
 msp\security\SpringSecurityConfig.class
+msp\services\UserDetailsServiceImpl.class
 msp\repositories\UserRepository.class
 msp\MainController.class
 msp\services\UserService.class
 msp\Application.class
+msp\services\SecurityService.class
 msp\model\User.class
 msp\services\UserServiceImpl.class

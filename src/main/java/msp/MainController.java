@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import msp.model.BasicUser;
 import msp.model.User;
-import msp.services.SecurityService;
 import msp.services.UserServiceImpl;
 
 
@@ -52,18 +52,26 @@ public class MainController {
 //		}
 //	}
 	
+	@RequestMapping(value = "/registration", method = RequestMethod.GET)
+	public String signUp() {
+		return "Hallo";
+	}
+	
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String registration(@RequestBody User userForm, BindingResult bindingResult) {
+    public String registration(@RequestBody BasicUser userForm, BindingResult bindingResult) {
 //        userValidator.validate(userForm, bindingResult);
 //
 //        if (bindingResult.hasErrors()) {
 //            return "registration";
 //        }
 
-        userService.save(userForm);
+		User user = new User();
+		user.setName(userForm.getUsername());
+		user.setPassword(userForm.getPassword());
+        userService.save(user);
 
         //securityService.autologin(userForm.getName(), userForm.getPassword());
 
-        return "redirect:/welcome";
+        return "hallo";
     }
 }
