@@ -30,22 +30,22 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	}
 
 	@Override
-	public UserDetails loadUserByUsername(final String name) throws UsernameNotFoundException {
-		System.out.println("load User "+ name);
+	public UserDetails loadUserByUsername(final String email) throws UsernameNotFoundException {
+		System.out.println("load User "+ email);
 		List<msp.model.User> users = userRepository.findAll();
 		msp.model.User user = null;
 		for(msp.model.User u: users) {
 			System.out.println("copare User "+ u.getName());
-			if(u.getName().equals(name)) {
-				System.out.println("found User "+ name);
+			if(u.getEmail().equals(email)) {
+				System.out.println("found User "+ email);
 				user = u;
 				break;
 			}
 		}
 		
 		if (user == null) {
-			System.out.println("Error");
-			throw new UsernameNotFoundException(name);
+			System.out.println("Error: User is null; in: UserDetailsService");
+			throw new UsernameNotFoundException(email);
 		}			
 		GrantedAuthority authority = new SimpleGrantedAuthority(user.getUserRole());
 		String encodedPassword = passwordEncoder().encode(user.getPassword());

@@ -66,8 +66,10 @@ public class MainController {
 //        }
 
 		User user = new User();
-		user.setName(userForm.getUsername());
+		user.setEmail(userForm.getEmail());
 		user.setPassword(userForm.getPassword());
+		System.out.println(userForm.getPassword());
+		user.setName(userForm.getUsername());
         userService.save(user);
 
         //securityService.autologin(userForm.getName(), userForm.getPassword());
