@@ -16,9 +16,6 @@ import msp.services.UserDetailsServiceImpl;
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	private AuthenticationEntryPoint authEntryPoint;
-	
-	@Autowired
 	@Qualifier("UserDetailsService")
 	UserDetailsServiceImpl userService;
 

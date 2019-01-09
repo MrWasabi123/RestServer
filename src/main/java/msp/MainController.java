@@ -20,9 +20,6 @@ public class MainController {
 	
 	@Autowired
 	UserServiceImpl userService;
-
-//	@Autowired
-//	private SecurityService securityService;
 	
 	@RequestMapping(value = "/all")
 	public List<User> getAllUsers(){
@@ -35,12 +32,6 @@ public class MainController {
 	public User getUser(@PathVariable Long id){
 		return userService.findUserById(id);
 	}
-	
-//	@PostMapping(value = "/load")
-//	public List<User> addUser(@RequestBody final User user){
-//		userService.save(user);
-//		return userService.findAllUsers();
-//	}
 	
 //	@PostMapping(value = "/login")
 //	public User loginUser(@RequestBody final User user){
@@ -59,11 +50,6 @@ public class MainController {
 	
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String registration(@RequestBody BasicUser userForm, BindingResult bindingResult) {
-//        userValidator.validate(userForm, bindingResult);
-//
-//        if (bindingResult.hasErrors()) {
-//            return "registration";
-//        }
 
 		User user = new User();
 		user.setEmail(userForm.getEmail());
@@ -71,8 +57,6 @@ public class MainController {
 		System.out.println(userForm.getPassword());
 		user.setName(userForm.getUsername());
         userService.save(user);
-
-        //securityService.autologin(userForm.getName(), userForm.getPassword());
 
         return "hallo";
     }
