@@ -5,6 +5,7 @@ public class BasicUser {
 	private String username;
 	private String email;
 	private String password;
+	private String encode;
 	
 	public BasicUser() {
 		
@@ -32,6 +33,14 @@ public class BasicUser {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	
+	public String getEncode() {
+		return this.encode;
+	}
+
+	public void setEncode(String encode) {
+		this.encode = encode;
 	}
 	
 	

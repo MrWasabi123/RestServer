@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import msp.model.BasicUser;
 import msp.model.User;
+import msp.model.UserUpdate;
 import msp.services.UserServiceImpl;
 
 
@@ -23,41 +24,42 @@ public class MainController {
 	
 	@RequestMapping(value = "/all")
 	public List<User> getAllUsers(){
-		System.out.println("something");
-		
 		return userService.findAllUsers();
 	}
 	
-	@RequestMapping(value = "/users/{id}")
+	@RequestMapping(value = "/all/{id}")
 	public User getUser(@PathVariable Long id){
 		return userService.findUserById(id);
 	}
 	
-//	@PostMapping(value = "/login")
-//	public User loginUser(@RequestBody final User user){
-//		List<User> users = userService.findAllUsers();
-//		if (users.contains(user)) {
-//			return user;
-//		} else {
-//			return null;
-//		}
-//	}
-	
-	@RequestMapping(value = "/registration", method = RequestMethod.GET)
-	public String signUp() {
-		return "Hallo";
+	@RequestMapping(value = "/tutors/{id}", method = RequestMethod.GET)
+	public List<User> getAllTutors(@PathVariable long id){
+		return userService.findAllTutors(id);
 	}
 	
+	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
+	public User updateUser(@PathVariable Long id, @RequestBody UserUpdate update) {
+		return userService.updateUser(update, id);
+	}
+	
+	@RequestMapping(value = "/loginUser", method = RequestMethod.POST)
+	public User loginUser(@RequestBody BasicUser userForm) {
+		return userService.findUserByEmail(userForm.getEmail());
+	}
+	
+	
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String registration(@RequestBody BasicUser userForm, BindingResult bindingResult) {
-
+    public User registration(@RequestBody BasicUser userForm, BindingResult bindingResult) {
+		
+//		String decode = userForm.getEncode();
+//		String result = new String(Base64.getDecoder().decode(decode.getBytes()));
 		User user = new User();
 		user.setEmail(userForm.getEmail());
 		user.setPassword(userForm.getPassword());
-		System.out.println(userForm.getPassword());
 		user.setName(userForm.getUsername());
+		System.out.println("User: "+ userForm.getEmail()+ "; "+userForm.getPassword()+" is registerd.");
         userService.save(user);
-
-        return "hallo";
+		
+        return user;
     }
 }
