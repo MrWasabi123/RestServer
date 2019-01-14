@@ -37,7 +37,9 @@ public class User implements Serializable{
 	@Column(name = "enabled")
     private boolean enabled;
 	@Column(name = "role")
-    private String userRole;;
+    private String userRole;
+    @Column(name = "firebase_id")
+    private String firebaseId;
 
     public User(){
 
@@ -160,6 +162,14 @@ public class User implements Serializable{
 
 	public void setUserRole(String userRole) {
 		this.userRole = userRole;
+	}
+	
+	public String getFirebaseId() {
+		return this.firebaseId;
+	}
+
+	public void setFirebaseId(String firebaseId) {
+		this.firebaseId = firebaseId;
 	}
     
     @Override

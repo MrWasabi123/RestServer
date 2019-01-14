@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import msp.model.BasicUser;
 import msp.model.User;
 import msp.model.UserUpdate;
 import msp.services.UserServiceImpl;
@@ -27,9 +26,14 @@ public class MainController {
 		return userService.findAllUsers();
 	}
 	
-	@RequestMapping(value = "/all/{id}")
-	public User getUser(@PathVariable Long id){
-		return userService.findUserById(id);
+//	@RequestMapping(value = "/all/{id}")
+//	public User getUser(@PathVariable Long id){
+//		return userService.findUserById(id);
+//	}
+	
+	@RequestMapping(value = "/all/{email}")
+	public User getUser(@PathVariable String email){
+		return userService.findUserByEmail(email);
 	}
 	
 	@RequestMapping(value = "/tutors/{id}", method = RequestMethod.GET)
@@ -43,21 +47,22 @@ public class MainController {
 	}
 	
 	@RequestMapping(value = "/loginUser", method = RequestMethod.POST)
-	public User loginUser(@RequestBody BasicUser userForm) {
-		return userService.findUserByEmail(userForm.getEmail());
+	public User loginUser(@RequestBody User user) {
+		return userService.findUserByEmail(user.getEmail());
 	}
 	
 	
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public User registration(@RequestBody BasicUser userForm, BindingResult bindingResult) {
+    public User registration(@RequestBody User user, BindingResult bindingResult) {
 		
 //		String decode = userForm.getEncode();
 //		String result = new String(Base64.getDecoder().decode(decode.getBytes()));
-		User user = new User();
-		user.setEmail(userForm.getEmail());
-		user.setPassword(userForm.getPassword());
-		user.setName(userForm.getUsername());
-		System.out.println("User: "+ userForm.getEmail()+ "; "+userForm.getPassword()+" is registerd.");
+//		User user = new User();
+//		user.setEmail(userForm.getEmail());
+//		user.setPassword(userForm.getPassword());
+//		user.setName(userForm.getUsername());
+//		user.setFirebaseId(userForm.getFirebaseId());
+//		System.out.println("User: "+ userForm.getEmail()+ "; "+userForm.getPassword()+" is registerd.");
         userService.save(user);
 		
         return user;
