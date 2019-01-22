@@ -17,6 +17,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -34,6 +35,7 @@ public class User implements Serializable{
 	@Column(name = "nickname")
     private String nickname;
 	@Column(name = "password")
+	@JsonIgnore
     private String password;
 	@Column(name = "studies")
     private String studies;

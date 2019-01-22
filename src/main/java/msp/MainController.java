@@ -54,7 +54,6 @@ public class MainController {
 	
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
     public User registration(@RequestBody User user, BindingResult bindingResult) {
-		
 //		String decode = userForm.getEncode();
 //		String result = new String(Base64.getDecoder().decode(decode.getBytes()));
 //		User user = new User();
