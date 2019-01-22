@@ -35,7 +35,7 @@ public class User implements Serializable{
 	@Column(name = "nickname")
     private String nickname;
 	@Column(name = "password")
-	@JsonIgnore
+	//@JsonIgnore
     private String password;
 	@Column(name = "studies")
     private String studies;
@@ -252,5 +252,35 @@ public class User implements Serializable{
                 "User[id=%d, Name='%s', NickName='%s']",
                 id, name, nickname);
     }
+
+	public void addUserRating(Rating rating) {
+		getUserRatings().add(rating);
+	}
+
+	public void removeUserRating(Rating rating) {
+		if(getUserRatings().contains(rating)) {
+			getUserRatings().remove(rating);
+		}
+	}
+	
+	public void addYourRating(Rating rating) {
+		getYourRatings().add(rating);
+	}
+
+	public void removeYourRating(Rating rating) {
+		if(getYourRatings().contains(rating)) {
+			getYourRatings().remove(rating);
+		}
+	}
+
+	public void addAppointment(Appointment appointment) {
+		getAppointments().add(appointment);
+	}
+
+	public void removeAppointment(Appointment appointment) {
+		if(getAppointments().contains(appointment)) {
+			getAppointments().remove(appointment);
+		}
+	}
 }
 

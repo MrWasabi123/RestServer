@@ -10,8 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import msp.model.Appointment;
+import msp.model.Lecture;
+import msp.model.Rating;
 import msp.model.User;
 import msp.model.UserUpdate;
+import msp.services.LectureServiceImpl;
 import msp.services.UserServiceImpl;
 
 
@@ -20,6 +24,9 @@ public class MainController {
 	
 	@Autowired
 	UserServiceImpl userService;
+	
+	@Autowired
+	LectureServiceImpl lectureService;
 	
 	@RequestMapping(value = "/all")
 	public List<User> getAllUsers(){
@@ -36,6 +43,12 @@ public class MainController {
 		return userService.findUserByEmail(email);
 	}
 	
+	@RequestMapping(value = "/lectures", method = RequestMethod.GET)
+	public List<Lecture> getAllLectures(){
+		return lectureService.findAllLectures();
+	}
+	
+	
 	@RequestMapping(value = "/tutors/{id}", method = RequestMethod.GET)
 	public List<User> getAllTutors(@PathVariable long id){
 		return userService.findAllTutors(id);
@@ -49,6 +62,46 @@ public class MainController {
 	@RequestMapping(value = "/loginUser", method = RequestMethod.POST)
 	public User loginUser(@RequestBody User user) {
 		return userService.findUserByEmail(user.getEmail());
+	}
+	
+	@RequestMapping(value = "/rating/add/{userId}", method = RequestMethod.POST)
+	public void addRating(@PathVariable Long id, @RequestBody Rating rating) {
+		User user = userService.findUserById(id);
+		User author = userService.findUserById(rating.getAuthor().getId());
+		user.addUserRating(rating);
+		author.addYourRating(rating);
+		userService.editUser(user);
+		userService.editUser(author);
+	}
+	
+	@RequestMapping(value = "/rating/remove/{userId}", method = RequestMethod.POST)
+	public void removeRating(@PathVariable Long id, @RequestBody Rating rating) {
+		User user = userService.findUserById(id);
+		User author = userService.findUserById(rating.getAuthor().getId());
+		user.removeUserRating(rating);
+		author.removeYourRating(rating);
+		userService.editUser(user);
+		userService.editUser(author);
+	}
+	
+	@RequestMapping(value = "/appointment/add/{userId}", method = RequestMethod.POST)
+	public void addAppointment(@PathVariable Long id, @RequestBody Appointment appointment) {
+		User user = userService.findUserById(id);
+		User author = userService.findUserById(appointment.getAppointmentAuthor().getId());
+		user.addAppointment(appointment);
+		author.addAppointment(appointment);
+		userService.editUser(user);
+		userService.editUser(author);
+	}
+	
+	@RequestMapping(value = "/appointment/remove/{userId}", method = RequestMethod.POST)
+	public void removeAppointment(@PathVariable Long id, @RequestBody Appointment appointment) {
+		User user = userService.findUserById(id);
+		User author = userService.findUserById(appointment.getAppointmentAuthor().getId());
+		user.removeAppointment(appointment);
+		author.removeAppointment(appointment);
+		userService.editUser(user);
+		userService.editUser(author);
 	}
 	
 	

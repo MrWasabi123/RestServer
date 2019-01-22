@@ -3,6 +3,12 @@ package msp.model;
 public class UserUpdate {
 	
 	 private String nickname;
+	 private String studies;
+	 private String subject;
+	 private String plan;
+	 
+	 
+	 
 	 public String getNickname() {
 		return nickname;
 	}
@@ -27,7 +33,4 @@ public class UserUpdate {
 	public void setPlan(String plan) {
 		this.plan = plan;
 	}
-	private String studies;
-	 private String subject;
-	 private String plan;
 }

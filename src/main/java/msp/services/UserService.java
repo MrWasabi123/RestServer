@@ -14,5 +14,6 @@ public interface UserService {
 	User updateUser(UserUpdate update, Long id);
 	User findUserByEmail(String email);
 	List<User> findAllTutors(long id);
+	User editUser(User user);
 
 }

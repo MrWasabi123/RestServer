@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -58,11 +57,15 @@ public class UserServiceImpl implements UserService { //
         //user.setPassword(passwordEncoder().encode(user.getPassword()));
         user.setEnabled(true);
         user.setUserRole("USER");
-        //Set<Lecture> lectures = user.getSubject();
         //Test
-        Set<Lecture> set = new HashSet<>(lectureRepository.findAll());
-        //set.add(new Lecture("Analysis", 1));
+        Set<Lecture> set = new HashSet<>();
+        Set<Lecture> set2 = user.getLectures();
+        for(Lecture l : set2) {
+        	set.add(lectureRepository.findById((long)l.getId()).get());
+        }
+        
         user.setLectures(set);
+        
         userRepository.save(user);
     }
 
@@ -78,6 +81,13 @@ public class UserServiceImpl implements UserService { //
 		
 		return user;
 	}
+	
+	@Override
+	public User editUser(User user) {
+		userRepository.save(user);
+		return user;
+	}
+	
 
 	@Override
 	public User findUserByEmail(String email) {
