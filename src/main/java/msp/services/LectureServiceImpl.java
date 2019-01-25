@@ -1,5 +1,6 @@
 package msp.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -19,6 +20,26 @@ public class LectureServiceImpl implements LectureService{
 	@Override
 	public List<Lecture> findAllLectures(){
 		return lectureRepository.findAll();
+	}
+
+	@Override
+	public List<Lecture> findById(long id) {
+		List<Lecture> lectures = new ArrayList<>();
+		lectures.add(lectureRepository.findById(id).get());
+		return lectures;
+	}
+
+	@Override
+	public List<Lecture> findAllBySearchQuerry(String searchQuerry) {
+		List<Lecture> lectures = new ArrayList<>();
+		for(Lecture l: lectureRepository.findAll()) {
+			String search = searchQuerry.toLowerCase();
+			String lectureName = l.getName().toLowerCase();
+			if(lectureName.contains(search)) {
+				lectures.add(l);
+			}
+		}
+		return lectures;
 	}
 
 }

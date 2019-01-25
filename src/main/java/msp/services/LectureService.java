@@ -8,4 +8,8 @@ public interface LectureService {
 
 	List<Lecture> findAllLectures();
 
+	List<Lecture> findById(long id);
+
+	List<Lecture> findAllBySearchQuerry(String searchQuerry);
+
 }

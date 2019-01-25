@@ -102,6 +102,19 @@ public class UserServiceImpl implements UserService { //
 		return user;
 	}
 	
+	@Override
+	public User findUserByFirebaseId(String firebase) {
+		List<User> users = userRepository.findAll();
+		User user = null;
+		for(User u: users) {
+			if(u.getFirebaseId().equals(firebase)) {
+				user = u;
+				break;
+			}
+		}
+		return user;
+	}
+	
 
 	@Override
 	public List<User> findAllTutors(long id) {
@@ -123,5 +136,7 @@ public class UserServiceImpl implements UserService { //
 	public void setRatingRepository(RatingRepository ratingRepository) {
 		this.ratingRepository = ratingRepository;
 	}
+
+	
 
 }

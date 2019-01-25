@@ -15,5 +15,6 @@ public interface UserService {
 	User findUserByEmail(String email);
 	List<User> findAllTutors(long id);
 	User editUser(User user);
+	User findUserByFirebaseId(String firebase);
 
 }

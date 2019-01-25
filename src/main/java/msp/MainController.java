@@ -43,9 +43,26 @@ public class MainController {
 		return userService.findUserByEmail(email);
 	}
 	
+	@RequestMapping(value = "/users/{firebase}")
+	public User getFireUser(@PathVariable String firebase){
+		return userService.findUserByFirebaseId(firebase);
+	}
+	
 	@RequestMapping(value = "/lectures", method = RequestMethod.GET)
 	public List<Lecture> getAllLectures(){
 		return lectureService.findAllLectures();
+	}
+	
+	@RequestMapping(value = "/lectures/{searchQuerry}", method = RequestMethod.GET)
+	public List<Lecture> getLectures(@PathVariable String searchQuerry){
+		try {
+			long id = (long) Integer.parseInt(searchQuerry);
+			return lectureService.findById(id);
+		}catch(Exception e) {
+			
+		}
+		
+		return lectureService.findAllBySearchQuerry(searchQuerry);
 	}
 	
 	
