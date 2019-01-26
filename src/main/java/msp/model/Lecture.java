@@ -20,7 +20,7 @@ public class Lecture implements Serializable{
 
     @Id
     @Column(name = "lecture_id")
-    private int id;
+    private long id;
     @Column(name = "name")
     private String name;
     
@@ -36,12 +36,12 @@ public class Lecture implements Serializable{
 
     }
 
-    public Lecture(String name, int id){
+    public Lecture(String name, long id){
         this.id = id;
         this.name = name;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -49,7 +49,7 @@ public class Lecture implements Serializable{
         return name;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

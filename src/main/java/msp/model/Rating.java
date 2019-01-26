@@ -24,12 +24,12 @@ public class Rating implements Serializable{
     private String description;
 	
 	@JsonIgnoreProperties({"appointments", "yourRatings", "userRatings", "lectures", "userRole", "enabled", "password"})
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_id")
 	private User user;
 	
 	@JsonIgnoreProperties({"appointments", "yourRatings", "userRatings", "lectures", "userRole", "enabled", "password"})
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "author_id")
 	private User author;
 

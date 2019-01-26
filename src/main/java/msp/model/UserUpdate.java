@@ -1,9 +1,12 @@
 package msp.model;
 
-public class UserUpdate {
+import java.io.Serializable;
+import java.util.Set;
+
+public class UserUpdate implements Serializable{
 	
 	 private String nickname;
-	 private String studies;
+	 private Set<Lecture> lectures;
 	 private String subject;
 	 private String plan;
 	 
@@ -15,11 +18,11 @@ public class UserUpdate {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	public String getStudies() {
-		return studies;
+	public Set<Lecture> getLectures() {
+		return lectures;
 	}
-	public void setStudies(String studies) {
-		this.studies = studies;
+	public void setLectures(Set<Lecture> lectures) {
+		this.lectures = lectures;
 	}
 	public String getSubject() {
 		return subject;

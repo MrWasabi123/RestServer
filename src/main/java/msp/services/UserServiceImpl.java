@@ -73,9 +73,18 @@ public class UserServiceImpl implements UserService { //
 	public User updateUser(UserUpdate update, Long id) {
 		User user = userRepository.findById(id).get();
 		user.setNickname(update.getNickname());
-		//user.setSubject(update.getSubject());
 		user.setSubject(null);
-		user.setStudies(update.getStudies());
+		
+		Set<Lecture> set = new HashSet<>();
+        Set<Lecture> set2 = update.getLectures();
+        for(Lecture l : set2) {
+        	Long lectureId = (long) l.getId();
+        	Lecture currentLecture = lectureRepository.findById(lectureId).get();
+        	set.add(currentLecture);
+        }
+        
+        user.setLectures(set);
+        
 		user.setPlan(update.getPlan());
 		userRepository.save(user);
 		
@@ -125,9 +134,16 @@ public class UserServiceImpl implements UserService { //
 				result.add(u);
 			}
 		}
+		sortTutors(result);
 		return result;
 	}
 
+
+	private void sortTutors(List<User> users) {
+		for(User u: users) {
+			
+		}
+	}
 
 	public RatingRepository getRatingRepository() {
 		return ratingRepository;
