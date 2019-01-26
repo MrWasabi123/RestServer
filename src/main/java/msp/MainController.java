@@ -65,6 +65,11 @@ public class MainController {
 		return lectureService.findAllBySearchQuerry(searchQuerry);
 	}
 	
+	@RequestMapping(value = "/lecture", method = RequestMethod.POST)
+	public void getAllLectures(@RequestBody Lecture lecture){
+		lectureService.save(lecture);
+	}
+	
 	
 	@RequestMapping(value = "/tutors/{id}", method = RequestMethod.GET)
 	public List<User> getAllTutors(@PathVariable long id){

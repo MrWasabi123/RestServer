@@ -42,4 +42,8 @@ public class LectureServiceImpl implements LectureService{
 		return lectures;
 	}
 
+	public void save(Lecture lecture) {
+		lectureRepository.save(lecture);
+	}
+
 }
