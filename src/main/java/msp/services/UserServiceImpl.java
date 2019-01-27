@@ -90,15 +90,25 @@ public class UserServiceImpl implements UserService { //
         }
         user.setUserRatings(userRatingsSet);
         
-        Set<Appointment> appointmentSet = new HashSet<>();
-        Set<Appointment> appointmentSetUpdate = user.getAppointments();
-        for(Appointment a : appointmentSetUpdate) {
+        Set<Appointment> yourAppointmentSet = new HashSet<>();
+        Set<Appointment> yourAppointmentSetUpdate = user.getYourAppointments();
+        for(Appointment a : yourAppointmentSetUpdate) {
         	long appointmentId = a.getId();
         	Appointment currentAppointment = appointmentRepository.findById(appointmentId).get();
-        	appointmentSet.add(currentAppointment);
+        	yourAppointmentSet.add(currentAppointment);
         }
         
-        user.setAppointments(appointmentSet);
+        user.setYourAppointments(yourAppointmentSet);
+        
+        Set<Appointment> userAppointmentSet = new HashSet<>();
+        Set<Appointment> userAppointmentSetUpdate = user.getUserAppointments();
+        for(Appointment a : userAppointmentSetUpdate) {
+        	long appointmentId = a.getId();
+        	Appointment currentAppointment = appointmentRepository.findById(appointmentId).get();
+        	userAppointmentSet.add(currentAppointment);
+        }
+        
+        user.setUserAppointments(userAppointmentSet);
         
 
 		String encoded = passwordEncoder().encode(user.getPassword());
@@ -147,16 +157,27 @@ public class UserServiceImpl implements UserService { //
         }
         user.setUserRatings(userRatingsSet);
         
-        Set<Appointment> appointmentSet = new HashSet<>();
-        Set<Appointment> appointmentSetUpdate = update.getAppointments();
-        if(appointmentSetUpdate != null) {
-	        for(Appointment a : appointmentSetUpdate) {
+        Set<Appointment> userAppointmentSet = new HashSet<>();
+        Set<Appointment> userAppointmentSetUpdate = update.getUserAppointments();
+        if(userAppointmentSetUpdate != null) {
+	        for(Appointment a : userAppointmentSetUpdate) {
 	        	long appointmentId = a.getId();
 	        	Appointment currentAppointment = appointmentRepository.findById(appointmentId).get();
-	        	appointmentSet.add(currentAppointment);
+	        	userAppointmentSet.add(currentAppointment);
 	        }
         }
-        user.setAppointments(appointmentSet);
+        user.setUserAppointments(userAppointmentSet);
+        
+        Set<Appointment> yourAppointmentSet = new HashSet<>();
+        Set<Appointment> yourAppointmentSetUpdate = update.getYourAppointments();
+        if(yourAppointmentSetUpdate != null) {
+	        for(Appointment a : yourAppointmentSetUpdate) {
+	        	long appointmentId = a.getId();
+	        	Appointment currentAppointment = appointmentRepository.findById(appointmentId).get();
+	        	yourAppointmentSet.add(currentAppointment);
+	        }
+        }
+        user.setYourAppointments(yourAppointmentSet);
          
 		user.setPlan(update.getPlan());
 		userRepository.save(user);
@@ -180,10 +201,20 @@ public class UserServiceImpl implements UserService { //
 				user = u;
 				break;
 			}
-		}
+		}  
+		
 		return user;
 	}
 	
+	private boolean containsAppointmentId(Set<Appointment> appointmentSetUser, long appointmentId) {
+		for(Appointment a: appointmentSetUser) {
+			if(a.getId() == appointmentId) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	@Override
 	public User findUserByFirebaseId(String firebase) {
 		List<User> users = userRepository.findAll();

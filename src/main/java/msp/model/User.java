@@ -70,7 +70,11 @@ public class User implements Serializable{
     
     @JsonIgnoreProperties("appointmentUser")
     @OneToMany(mappedBy = "appointmentUser", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Appointment> appointments;
+    private Set<Appointment> userAppointments;
+    
+    @JsonIgnoreProperties("appointmentAuthor")
+    @OneToMany(mappedBy = "appointmentAuthor", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Appointment> yourAppointments;
     
 
     
@@ -105,12 +109,20 @@ public class User implements Serializable{
 
 	
     
-    public Set<Appointment> getAppointments() {
-		return appointments;
+    public Set<Appointment> getUserAppointments() {
+		return userAppointments;
 	}
 
-	public void setAppointments(Set<Appointment> appointments) {
-		this.appointments = appointments;
+	public void setUserAppointments(Set<Appointment> appointments) {
+		this.userAppointments = appointments;
+	}
+	
+	public Set<Appointment> getYourAppointments() {
+		return yourAppointments;
+	}
+
+	public void setYourAppointments(Set<Appointment> appointments) {
+		this.yourAppointments = appointments;
 	}
 
 	public long getId() {
@@ -273,13 +285,23 @@ public class User implements Serializable{
 		}
 	}
 
-	public void addAppointment(Appointment appointment) {
-		getAppointments().add(appointment);
+	public void addYourAppointment(Appointment appointment) {
+		getYourAppointments().add(appointment);
 	}
 
-	public void removeAppointment(Appointment appointment) {
-		if(getAppointments().contains(appointment)) {
-			getAppointments().remove(appointment);
+	public void removeYourAppointment(Appointment appointment) {
+		if(getYourAppointments().contains(appointment)) {
+			getYourAppointments().remove(appointment);
+		}
+	}
+	
+	public void addUserAppointment(Appointment appointment) {
+		getUserAppointments().add(appointment);
+	}
+
+	public void removeUserAppointment(Appointment appointment) {
+		if(getUserAppointments().contains(appointment)) {
+			getUserAppointments().remove(appointment);
 		}
 	}
 }

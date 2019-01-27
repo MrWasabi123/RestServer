@@ -23,18 +23,18 @@ public class Appointment implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	
-	@JsonIgnoreProperties({"appointments", "yourRatings", "userRatings", "lectures", "userRole", "enabled", "password"})
+	@JsonIgnoreProperties({"yourAppointments","userAppointments", "yourRatings", "userRatings", "lectures", "userRole", "enabled", "password"})
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
     private User appointmentUser;
 	
-	@JsonIgnoreProperties({"appointments", "yourRatings", "userRatings", "lectures", "userRole", "enabled", "password"})
+	@JsonIgnoreProperties({"yourAppointments","userAppointments", "yourRatings", "userRatings", "lectures", "userRole", "enabled", "password"})
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "author_id")
     private User appointmentAuthor;
 
 	@JsonIgnoreProperties({"appointments", "users"})
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "lecture_id")
     private Lecture subject;
 	

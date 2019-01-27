@@ -1,13 +1,9 @@
 package msp;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,15 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.databind.ser.FilterProvider;
-import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
-import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
-
 import msp.model.Appointment;
 import msp.model.Lecture;
 import msp.model.Rating;
 import msp.model.User;
 import msp.model.UserUpdate;
+import msp.services.AppointmentServiceImpl;
 import msp.services.LectureServiceImpl;
 import msp.services.UserServiceImpl;
 
@@ -36,6 +29,9 @@ public class MainController {
 	
 	@Autowired
 	LectureServiceImpl lectureService;
+	
+	@Autowired
+	AppointmentServiceImpl appointmentService;
 	
 	@RequestMapping(value = "/all")
 	public List<User> getAllUsers(){
@@ -137,14 +133,19 @@ public class MainController {
 		return getMapping(author);
 	}
 	
+	@RequestMapping(value = "/appointment/update/{appointmentId}", method = RequestMethod.POST)
+	public Appointment updateAppointment(@PathVariable Long appointmentId, @RequestBody Appointment appointment) {
+		return appointmentService.updateAppointment(appointment, appointmentId);
+	}
+	
 	@RequestMapping(value = "/appointment/add/{userId}", method = RequestMethod.POST)
 	public User addAppointment(@PathVariable Long userId, @RequestBody Appointment appointment) {
 		User user = userService.findUserById(userId);
 		User author = userService.findUserById(appointment.getAppointmentAuthor().getId());
-		user.addAppointment(appointment);
-		//author.addAppointment(appointment);
-		userService.editUser(user);
-		//userService.editUser(author);
+		//user.addUserAppointment(appointment);
+		author.addYourAppointment(appointment);
+		//userService.editUser(user);
+		userService.editUser(author);
 		return getMapping(author);
 	}
 	
@@ -152,7 +153,7 @@ public class MainController {
 	public User removeAppointment(@PathVariable Long id, @RequestBody Appointment appointment) {
 		User user = userService.findUserById(id);
 		User author = userService.findUserById(appointment.getAppointmentAuthor().getId());
-		user.removeAppointment(appointment);
+		user.removeUserAppointment(appointment);
 		//author.removeAppointment(appointment);
 		userService.editUser(user);
 		//userService.editUser(author);

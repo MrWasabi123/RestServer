@@ -29,7 +29,7 @@ public class Lecture implements Serializable{
     //@JsonIgnoreProperties("lectures")
     private Set<User> users;
     
-    @OneToMany(mappedBy = "subject", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "subject", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Appointment> appointments;
 
     public Lecture(){

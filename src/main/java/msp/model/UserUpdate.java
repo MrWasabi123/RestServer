@@ -9,7 +9,8 @@ public class UserUpdate implements Serializable{
 	 private Set<Lecture> lectures;
 	 private Set<Rating> yourRatings;
 	 private Set<Rating> userRatings;
-	 private Set<Appointment> appoinments;
+	 private Set<Appointment> userAppoinments;
+	 private Set<Appointment> yourAppoinments;
 	 private String subject;
 	 private String plan;
 	 
@@ -39,11 +40,17 @@ public class UserUpdate implements Serializable{
 	public void setUserRatings(Set<Rating> userRatings) {
 		this.userRatings = userRatings;
 	}
-	public Set<Appointment> getAppointments() {
-		return this.appoinments;
+	public Set<Appointment> getUserAppointments() {
+		return this.userAppoinments;
 	}
-	public void setAppointments(Set<Appointment> appoinments) {
-		this.appoinments = appoinments;
+	public void setUserAppointments(Set<Appointment> appoinments) {
+		this.userAppoinments = appoinments;
+	}
+	public Set<Appointment> getYourAppointments() {
+		return this.yourAppoinments;
+	}
+	public void setYourAppointments(Set<Appointment> appoinments) {
+		this.yourAppoinments = appoinments;
 	}
 	public String getSubject() {
 		return subject;

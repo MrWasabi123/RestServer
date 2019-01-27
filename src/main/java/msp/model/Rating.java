@@ -26,12 +26,12 @@ public class Rating implements Serializable{
 	@Column(name = "description")
     private String description;
 	
-	@JsonIgnoreProperties({"appointments", "yourRatings", "userRatings", "lectures", "userRole", "enabled", "password"})
+	@JsonIgnoreProperties({"yourAppointments","userAppointments", "yourRatings", "userRatings", "lectures", "userRole", "enabled", "password"})
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_id")
 	private User user;
 	
-	@JsonIgnoreProperties({"appointments", "yourRatings", "userRatings", "lectures", "userRole", "enabled", "password"})
+	@JsonIgnoreProperties({"yourAppointments","userAppointments", "yourRatings", "userRatings", "lectures", "userRole", "enabled", "password"})
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "author_id")
 	private User author;
