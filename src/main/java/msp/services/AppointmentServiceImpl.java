@@ -51,4 +51,12 @@ public class AppointmentServiceImpl implements AppointmentService{
 		save(updateThis);
 	}
 
+	public Appointment findById(long id) {
+		return appointmentRepository.findById(id).get();
+	}
+	
+	public void removeAppointment(Appointment appointment) {
+		appointmentRepository.delete(appointment);
+	}
+
 }

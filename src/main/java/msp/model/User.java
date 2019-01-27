@@ -293,8 +293,9 @@ public class User implements Serializable{
 	}
 
 	public void removeYourAppointment(Appointment appointment) {
-		if(getYourAppointments().contains(appointment)) {
-			getYourAppointments().remove(appointment);
+		Appointment removeThis = userHasAppointment(getYourAppointments(), appointment);
+		if(removeThis != null) {
+			getYourAppointments().remove(removeThis);
 		}
 	}
 	
@@ -303,9 +304,19 @@ public class User implements Serializable{
 	}
 
 	public void removeUserAppointment(Appointment appointment) {
-		if(getUserAppointments().contains(appointment)) {
-			getUserAppointments().remove(appointment);
+		Appointment removeThis = userHasAppointment(getUserAppointments(), appointment);
+		if(removeThis != null) {
+			getUserAppointments().remove(removeThis);
 		}
+	}
+
+	private Appointment userHasAppointment(Set<Appointment> appointments, Appointment appointment) {
+		for(Appointment a: appointments) {
+			if(a.getId() == appointment.getId()) {
+				return a;
+			}
+		}
+		return null;
 	}
 }
 

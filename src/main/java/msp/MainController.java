@@ -85,10 +85,19 @@ public class MainController {
 		}
 	}
 
-	@RequestMapping(value = "/tutors/{id}", method = RequestMethod.GET)
-	public List<User> getAllTutors(@PathVariable long id){
+//	@RequestMapping(value = "/tutors/{id}", method = RequestMethod.GET)
+//	public List<User> getAllTutors(@PathVariable long id){
+//		List<User> mappings = new ArrayList<>();
+//		for(User u: userService.findAllTutors(id)) {
+//			mappings.add(getMapping(u));
+//		}
+//		return mappings;
+//	}
+	
+	@RequestMapping(value = "/tutors/{email}", method = RequestMethod.GET)
+	public List<User> getAllTutors(@PathVariable String email){
 		List<User> mappings = new ArrayList<>();
-		for(User u: userService.findAllTutors(id)) {
+		for(User u: userService.findAllTutors(email)) {
 			mappings.add(getMapping(u));
 		}
 		return mappings;
@@ -102,6 +111,11 @@ public class MainController {
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
 	public User updateUser(@PathVariable Long id) {
 		return getMapping(userService.findUserById(id));
+	}
+	
+	@RequestMapping(value = "/updateEmail/{email}", method = RequestMethod.GET)
+	public User updateUser(@PathVariable String email) {
+		return getMapping(userService.findUserByEmail(email));
 	}
 	
 	@RequestMapping(value = "/loginUser", method = RequestMethod.POST)
@@ -151,14 +165,17 @@ public class MainController {
 	}
 	
 	@RequestMapping(value = "/appointment/remove/{userId}", method = RequestMethod.POST)
-	public User removeAppointment(@PathVariable Long id, @RequestBody Appointment appointment) {
-		User user = userService.findUserById(id);
+	public User removeAppointment(@PathVariable Long userId, @RequestBody Appointment appointment) {
+		User user = userService.findUserById(userId);
 		User author = userService.findUserById(appointment.getAppointmentAuthor().getId());
+		
+		Appointment removeThis = appointmentService.findById(appointment.getId());
+		appointmentService.removeAppointment(removeThis);
 		user.removeUserAppointment(appointment);
-		//author.removeAppointment(appointment);
+		//author.removeYourAppointment(appointment);
 		userService.editUser(user);
 		//userService.editUser(author);
-		return getMapping(author);
+		return getMapping(user);
 	}
 	
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)

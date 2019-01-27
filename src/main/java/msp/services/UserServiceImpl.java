@@ -240,6 +240,18 @@ public class UserServiceImpl implements UserService { //
 		}
 		return result;
 	}
+	
+	@Override
+	public List<User> findAllTutors(String email) {
+		List<User> users = userRepository.findAll();
+		List<User> result = new ArrayList<User>();
+		for(User u: users) {
+			if(u.getNickname() != null && u.getNickname().equals("Tutor") && !u.getEmail().equals(email)) {
+				result.add(u);
+			}
+		}
+		return result;
+	}
 
 
 	public RatingRepository getRatingRepository() {
@@ -249,6 +261,8 @@ public class UserServiceImpl implements UserService { //
 	public void setRatingRepository(RatingRepository ratingRepository) {
 		this.ratingRepository = ratingRepository;
 	}
+
+	
 
 	
 
