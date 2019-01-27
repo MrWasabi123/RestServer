@@ -57,7 +57,17 @@ public class User implements Serializable{
     @Column(name = "imageURL")
     private String imageURL;
     
+    private String image;
+    
    
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
 	@ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_lecture", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"), inverseJoinColumns = @JoinColumn(name = "lecture_id", referencedColumnName = "lecture_id"))
     @JsonIgnoreProperties("users")

@@ -13,10 +13,29 @@ public class UserUpdate implements Serializable{
 	 private Set<Appointment> yourAppoinments;
 	 private String subject;
 	 private String plan;
+	 private String image;
 	 
 	 
 	 
-	 public String getNickname() {
+	 public Set<Appointment> getUserAppoinments() {
+		return userAppoinments;
+	}
+	public void setUserAppoinments(Set<Appointment> userAppoinments) {
+		this.userAppoinments = userAppoinments;
+	}
+	public Set<Appointment> getYourAppoinments() {
+		return yourAppoinments;
+	}
+	public void setYourAppoinments(Set<Appointment> yourAppoinments) {
+		this.yourAppoinments = yourAppoinments;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+	public String getNickname() {
 		return nickname;
 	}
 	public void setNickname(String nickname) {

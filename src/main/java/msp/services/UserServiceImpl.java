@@ -1,13 +1,14 @@
 package msp.services;
 
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -181,7 +182,20 @@ public class UserServiceImpl implements UserService { //
          
 		user.setPlan(update.getPlan());
 		userRepository.save(user);
-		
+		user.setImage(update.getImage());
+		//decode Base64 String to image
+				try{
+					String fileName = "imageprofile.png";
+					String fileLocation = new File("static\\images").getAbsolutePath() + "\\" + fileName;
+					FileOutputStream fos = new FileOutputStream(fileLocation);
+					byte byteArray[] = Base64.decodeBase64(update.getImage());
+					fos.write(byteArray);
+					 
+					fos.close();		
+				}
+				catch(Exception e){
+					e.printStackTrace();
+				}
 		return user;
 	}
 	
