@@ -12,10 +12,14 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "lecture")
+@JsonAutoDetect(fieldVisibility = Visibility.ANY)
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Lecture implements Serializable{
 
     @Id
@@ -29,7 +33,7 @@ public class Lecture implements Serializable{
     //@JsonIgnoreProperties("lectures")
     private Set<User> users;
     
-    @OneToMany(mappedBy = "subject", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "subject", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Appointment> appointments;
 
     public Lecture(){

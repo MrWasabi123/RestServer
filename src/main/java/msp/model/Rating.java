@@ -1,6 +1,7 @@
 package msp.model;
 
 import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,10 +12,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "rating")
+@JsonAutoDetect(fieldVisibility = Visibility.ANY)
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Rating implements Serializable{
 
 	@Id
@@ -27,12 +32,12 @@ public class Rating implements Serializable{
     private String description;
 	
 	@JsonIgnoreProperties({"yourAppointments","userAppointments", "yourRatings", "userRatings", "lectures", "userRole", "enabled", "password"})
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private User user;
 	
 	@JsonIgnoreProperties({"yourAppointments","userAppointments", "yourRatings", "userRatings", "lectures", "userRole", "enabled", "password"})
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "author_id")
 	private User author;
 

@@ -12,16 +12,20 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "appointment")
+@JsonAutoDetect(fieldVisibility = Visibility.ANY)
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Appointment implements Serializable {
 	
 	@Id
     @Column(name = "appointment_id")
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	private long id;
 	
 	@JsonIgnoreProperties({"yourAppointments","userAppointments", "yourRatings", "userRatings", "lectures", "userRole", "enabled", "password"})
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -34,7 +38,7 @@ public class Appointment implements Serializable {
     private User appointmentAuthor;
 
 	@JsonIgnoreProperties({"appointments", "users"})
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "lecture_id")
     private Lecture subject;
 	
@@ -51,7 +55,7 @@ public class Appointment implements Serializable {
 		
 	}
 
-    public Appointment(int id, User appointmentUser, User appointmentAuthor, Lecture subject, String date, String time, boolean accepted){
+    public Appointment(long id, User appointmentUser, User appointmentAuthor, Lecture subject, String date, String time, boolean accepted){
     	this.id = id;
         this.appointmentUser = appointmentUser;
         this.appointmentAuthor = appointmentAuthor;
@@ -72,11 +76,11 @@ public class Appointment implements Serializable {
 		this.appointmentAuthor = appointmentAuthor;
 	}
 	
-    public int getId() {
+    public long getId() {
     	return this.id;
     }
     
-    public void setId(int id) {
+    public void setId(long id) {
     	this.id = id;
     }
     

@@ -133,9 +133,10 @@ public class MainController {
 		return getMapping(author);
 	}
 	
-	@RequestMapping(value = "/appointment/update/{appointmentId}", method = RequestMethod.POST)
-	public Appointment updateAppointment(@PathVariable Long appointmentId, @RequestBody Appointment appointment) {
-		return appointmentService.updateAppointment(appointment, appointmentId);
+	@RequestMapping(value = "/appointment/update/{userId}", method = RequestMethod.POST)
+	public User updateAppointment(@PathVariable Long userId, @RequestBody Appointment appointment) {
+		appointmentService.updateAppointment(appointment);
+		return userService.findUserById(userId);
 	}
 	
 	@RequestMapping(value = "/appointment/add/{userId}", method = RequestMethod.POST)

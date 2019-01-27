@@ -10,6 +10,6 @@ public interface AppointmentService {
 
 	List<Appointment> findById(long id, int size);
 	
-	Appointment updateAppointment(Appointment appointment, long id);
+	void updateAppointment(Appointment appointment);
 
 }

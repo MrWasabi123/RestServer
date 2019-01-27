@@ -44,11 +44,11 @@ public class AppointmentServiceImpl implements AppointmentService{
 	}
 
 	@Override
-	public Appointment updateAppointment(Appointment appointment, long id) {
-		Appointment updateThis = appointmentRepository.findById(id).get();
+	public void updateAppointment(Appointment appointment) {
+		Long appointmentId = (long) appointment.getId();
+		Appointment updateThis = appointmentRepository.findById(appointment.getId()).get();
 		updateThis.setAccepted(appointment.getAccepted());
 		save(updateThis);
-		return updateThis;
 	}
 
 }
