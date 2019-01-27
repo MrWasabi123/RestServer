@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,6 +20,7 @@ public class Appointment implements Serializable {
 	
 	@Id
     @Column(name = "appointment_id")
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	
 	@JsonIgnoreProperties({"appointments", "yourRatings", "userRatings", "lectures", "userRole", "enabled", "password"})
@@ -41,17 +44,21 @@ public class Appointment implements Serializable {
 	@Column(name = "time")
     private String time;
 	
+	@Column(name = "accepted")
+    private boolean accepted;
+	
 	public Appointment() {
 		
 	}
 
-    public Appointment(int id, User appointmentUser, User appointmentAuthor, Lecture subject, String date, String time){
+    public Appointment(int id, User appointmentUser, User appointmentAuthor, Lecture subject, String date, String time, boolean accepted){
     	this.id = id;
         this.appointmentUser = appointmentUser;
         this.appointmentAuthor = appointmentAuthor;
         this.subject = subject;
         this.date = date;
         this.time = time;
+        this.accepted = accepted;
     }
 
     
@@ -101,8 +108,16 @@ public class Appointment implements Serializable {
         return time;
     }
 
-    public void setTime(String plan) {
+    public void setTime(String time) {
         this.time = time;
+    }
+    
+    public boolean getAccepted() {
+        return this.accepted;
+    }
+
+    public void setAccepted(boolean accepted) {
+        this.accepted = accepted;
     }
     
 }

@@ -23,20 +23,32 @@ public class LectureServiceImpl implements LectureService{
 	}
 
 	@Override
-	public List<Lecture> findById(long id) {
+	public List<Lecture> findById(long id, int size) {
+		String stringId = ""+id;
 		List<Lecture> lectures = new ArrayList<>();
-		lectures.add(lectureRepository.findById(id).get());
+		for(Lecture l: lectureRepository.findAll()) {
+			String lectureIdString = ""+l.getId();
+			if(lectureIdString.contains(stringId) && lectures.size()<=size) {
+				lectures.add(l);
+			}
+			if(lectures.size()>size) {
+				break;
+			}
+		}
 		return lectures;
 	}
 
 	@Override
-	public List<Lecture> findAllBySearchQuerry(String searchQuerry) {
+	public List<Lecture> findAllBySearchQuerry(String searchQuerry, int size) {
 		List<Lecture> lectures = new ArrayList<>();
 		for(Lecture l: lectureRepository.findAll()) {
 			String search = searchQuerry.toLowerCase();
 			String lectureName = l.getName().toLowerCase();
-			if(lectureName.contains(search)) {
+			if(lectureName.contains(search) && lectures.size()<=size) {
 				lectures.add(l);
+			}
+			if(lectures.size()>size) {
+				break;
 			}
 		}
 		return lectures;

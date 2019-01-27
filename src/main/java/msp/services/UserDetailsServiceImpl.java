@@ -48,8 +48,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 			throw new UsernameNotFoundException(email);
 		}			
 		GrantedAuthority authority = new SimpleGrantedAuthority(user.getUserRole());
-		String encodedPassword = passwordEncoder().encode(user.getPassword());
-		UserDetails userDetails = (UserDetails)new User(user.getName(), encodedPassword, user.isEnabled(), true, true, true, Arrays.asList(authority));
+		//String encodedPassword = passwordEncoder().encode(user.getPassword());
+		UserDetails userDetails = (UserDetails)new User(user.getName(), user.getPassword(), user.isEnabled(), true, true, true, Arrays.asList(authority));
 		return userDetails;
 		
 	}
