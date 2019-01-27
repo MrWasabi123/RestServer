@@ -116,37 +116,45 @@ public class UserServiceImpl implements UserService { //
 		
 		Set<Lecture> set = new HashSet<>();
         Set<Lecture> set2 = update.getLectures();
-        for(Lecture l : set2) {
-        	Long lectureId = (long) l.getId();
-        	Lecture currentLecture = lectureRepository.findById(lectureId).get();
-        	set.add(currentLecture);
+        if(set2 != null) {
+	        for(Lecture l : set2) {
+	        	Long lectureId = (long) l.getId();
+	        	Lecture currentLecture = lectureRepository.findById(lectureId).get();
+	        	set.add(currentLecture);
+	        }
         }
         user.setLectures(set);
         
         Set<Rating> yourRatingsSet = new HashSet<>();
         Set<Rating> yourRatingsSetUpdate = update.getYourRatings();
-        for(Rating r : yourRatingsSetUpdate) {
-        	long ratingId = r.getId();
-        	Rating currentRating = ratingRepository.findById(ratingId).get();
-        	yourRatingsSet.add(currentRating);
+        if(yourRatingsSetUpdate != null) {
+	        for(Rating r : yourRatingsSetUpdate) {
+	        	long ratingId = r.getId();
+	        	Rating currentRating = ratingRepository.findById(ratingId).get();
+	        	yourRatingsSet.add(currentRating);
+	        }
         }
         user.setYourRatings(yourRatingsSet);
         
         Set<Rating> userRatingsSet = new HashSet<>();
         Set<Rating> userRatingsSetUpdate = update.getUserRatings();
-        for(Rating r : userRatingsSetUpdate) {
-        	long ratingId = r.getId();
-        	Rating currentRating = ratingRepository.findById(ratingId).get();
-        	userRatingsSet.add(currentRating);
+        if(userRatingsSetUpdate != null) {
+	        for(Rating r : userRatingsSetUpdate) {
+	        	long ratingId = r.getId();
+	        	Rating currentRating = ratingRepository.findById(ratingId).get();
+	        	userRatingsSet.add(currentRating);
+	        }
         }
         user.setUserRatings(userRatingsSet);
         
         Set<Appointment> appointmentSet = new HashSet<>();
         Set<Appointment> appointmentSetUpdate = update.getAppointments();
-        for(Appointment a : appointmentSetUpdate) {
-        	long appointmentId = a.getId();
-        	Appointment currentAppointment = appointmentRepository.findById(appointmentId).get();
-        	appointmentSet.add(currentAppointment);
+        if(appointmentSetUpdate != null) {
+	        for(Appointment a : appointmentSetUpdate) {
+	        	long appointmentId = a.getId();
+	        	Appointment currentAppointment = appointmentRepository.findById(appointmentId).get();
+	        	appointmentSet.add(currentAppointment);
+	        }
         }
         user.setAppointments(appointmentSet);
          
